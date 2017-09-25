@@ -1,0 +1,17 @@
+<!--Navigation-->
+<div class="navbar-fixed">
+  <nav  role="navigation">
+    <div class="nav-wrapper blue ">
+      <a [routerLink]="['']" id="logo-container" class="brand-logo">Rails & Angular Auth</a>
+      <ul class="right hide-on-med-and-down set-margin">
+<!--    <li *ngIf="!loaded"><a (click)="presentAuthDialog('login')" >LOGIN</a></li>
+        <li *ngIf="!loaded"><a (click)="presentAuthDialog('register')">REGISTER</a></li> -->
+        <li *ngIf="!loaded"><a (click)="loginWithFacebook()">Login with facebook</a></li>
+        <li *ngIf="loaded"><a [routerLink]="['/panel']">PANEL</a></li>
+        <li *ngIf="loaded"><a [routerLink]="['/profile']">PROFILE</a></li>
+        <li *ngIf="loaded"><a (click)="logOut()">LOGOUT</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<app-auth-dialog #authDialog ></app-auth-dialog>

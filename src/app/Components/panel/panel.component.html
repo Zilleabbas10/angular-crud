@@ -1,0 +1,95 @@
+
+<!-- alert -->
+<div [@dialog] class="dialog" *ngIf="show">
+  <ng-content></ng-content>
+  <div class="set-alert1">
+  <h5>Confirm Delete</h5>
+  <p>Are you sure you want delete book ??</p>
+  <div class="row">
+    <div class="col-md-6"><button type="submit" class="btn" (click)="closeDeleteAlertDialog()">Cancel</button></div>
+    <div class="col-md-6"><button type="submit" class="btn" (click)="deleteItem()">OK</button></div>
+  </div>
+</div>
+  </div>
+
+
+
+<!-- table -->
+<div class="container">
+  <h2>Books Table</h2>
+  <button (click)="showAddUpdatedialog('Add')" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+  <table class="table table-bordered" id="cssTable">
+    <thead>
+      <tr>
+        <th>S.no</th>
+        <th>Author</th>
+        <th>Book Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dat of data1; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{dat.author}}</td>
+        <td>{{dat.book_name}}</td>
+        <td>{{dat.description}}</td>
+        <td>
+        	<div class="set-icons">
+	        	<span class="glyphicon glyphicon-trash set-pad" (click)="showDeleteDailog(dat.id)"></span>
+	        	<span class="glyphicon glyphicon-pencil set-pad" (click)="showAddUpdatedialog('Update', dat, dat.id)"></span>
+        	</div>
+        </td>
+      </tr>
+      <tr>
+    </tbody>
+   <!--  <tbody *ngIf="data1.length == 0">
+      <tr>No books</tr>
+    </tbody> -->
+  </table>
+</div>
+
+
+<!-- add update -->
+<!-- <app-add-task [(visible)]="showDialog"> -->
+  <div [@dialog1] class="dialog1" *ngIf="show1">
+  <ng-content></ng-content>
+
+  <span (click)="closeAddUpdatedialog()" aria-label="Close" class="modal-close right dialog__close-btn">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </span>
+  <div *ngIf="loadFlash" class="alert alert-success set-alert" role="alert">
+  You successfully {{heading}} book .
+</div>
+
+<!-- <div class="alert alert-danger set-alert" role="alert">
+  <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+</div> -->
+
+
+<div class="container">
+  <h3>{{heading}} Book</h3>
+  <form [formGroup]="crudForm" (ngSubmit)="crudSubmitForm()">
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" class="form-control" formControlName="author" id="author" name="author">
+    </div>
+    <div class="form-group">
+      <label for="book_name">Book Name:</label>
+      <input type="text" class="form-control" formControlName="book_name" id="book_name" name="book_name">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" formControlName="description" name="description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default" [disabled]="!crudForm.valid">{{heading}}</button>
+  </form>
+</div>
+</div>
+  <!-- <button (click)="showDialog = !showDialog" class="btn">Close</button> -->
+<!-- </app-add-task> -->
+
+
+
+
+
