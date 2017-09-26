@@ -166,7 +166,13 @@ public data: any = [
   getBooks(){
      this.apiservice.getBooks(this.user_id).then( (res) => {
        let result: any = res;
-     this.data1 = result.data;
+       console.log(result);
+       if(result.data == ''){
+         this.data1 = [];
+       }else{
+         this.data1 = result.data;
+       }
+
     },(error) => {
     });
   }
