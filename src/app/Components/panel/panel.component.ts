@@ -70,7 +70,6 @@ public data: any = [
   constructor(public formBuilder: FormBuilder, private apiservice: ApiService, private localStorageService: LocalStorageService) {
      this.checkDatabase = this.localStorageService.get('data');
      this.user_id = this.checkDatabase.id;
-     console.log(this.user_id);
      this.getBooks();
    }
 
@@ -80,7 +79,6 @@ public data: any = [
       book_name: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
-    console.log(this.crudForm);
   }
 
   closeDeleteAlertDialog() {
@@ -100,11 +98,8 @@ public data: any = [
            this.getBooks();
            this.show = false;
          }
-         console.log(res)
       },(error) => {
-        console.log(error);
       });
-    console.log("Zille deleted");
   }
 
   showDeleteDailog(book_id){
@@ -125,9 +120,7 @@ public data: any = [
   }
 
   crudSubmitForm(){
-    console.log(this.heading);
     if(this.heading == "Add"){
-      console.log("Run Add Api");
       let add: any = {
         user_id: this.user_id,
         author: this.crudForm.value.author,
@@ -142,10 +135,8 @@ public data: any = [
           this.getBooks();
        }
       },(error) => {
-        console.log(error);
       });
     }else{
-      console.log("Run Update Api");
       let update: any = {
         user_id: this.user_id,
         author: this.crudForm.value.author,
@@ -160,13 +151,11 @@ public data: any = [
           this.crudForm.reset();
        }
       },(error) => {
-        console.log(error);
       });
     }
   }
 
     patchValues(data){
-    console.log(data.name, data.description, data.email);
     this.crudForm.patchValue({
             author: data.author,
             description: data.description,
@@ -178,9 +167,7 @@ public data: any = [
      this.apiservice.getBooks(this.user_id).then( (res) => {
        let result: any = res;
      this.data1 = result.data;
-     console.log(this.data1);
     },(error) => {
-        console.log(error);
     });
   }
 

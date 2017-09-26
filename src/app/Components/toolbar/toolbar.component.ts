@@ -21,7 +21,6 @@ export class ToolbarComponent implements OnInit {
 
   constructor(private router:Router, private localStorageService: LocalStorageService, private apiservice: ApiService, private fb: FacebookService) {
    this.checkDatabase = this.localStorageService.get('data');
-   console.log(this.checkDatabase);
    if(this.checkDatabase != null ){
     if(this.checkDatabase.access_token != null){
       this.loaded = true;
@@ -54,8 +53,6 @@ export class ToolbarComponent implements OnInit {
           expiryTime: response.authResponse.expiresIn,
           signedRequest: response.authResponse.signedRequest
           }
-          console.log(loginData);
-
           this.getProfile(loginData);
         })
       .catch((error: any) => console.error(error));
@@ -93,7 +90,6 @@ export class ToolbarComponent implements OnInit {
   logOut(){
     this.localStorageService.clearAll();
     location.reload();
-    console.log("Logout");
   }
 
   presentAuthDialog(mode){

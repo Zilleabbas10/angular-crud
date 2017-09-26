@@ -10,8 +10,8 @@ export class ApiService {
   public headers: any;
   public token: string;
   public checkDatabase: any;
-  public base_url: string = 'https://rails-angular2.herokuapp.com/';
-  // public base_url: string = 'http://192.168.10.4:3000/';
+  //public base_url: string = 'https://rails-angular2.herokuapp.com/';
+  public base_url: string = 'http://192.168.10.5:3000/';
 
   constructor(public http: Http, private localStorageService: LocalStorageService) {
     this.checkDatabase = this.localStorageService.get('data');
@@ -23,22 +23,7 @@ export class ApiService {
     this.headers.append('Authorization', "Token token=" + this.token);
   }
 
-  getJobs(){
-  	return this.http.get('../assets/data/jobs.json').map(res => res.json());
-  }
 
-  getLatLong(){
-    return new Promise(resolve => {
-     this.http
-        .get('https://maps.googleapis.com/maps/api/geocode/json?address=islamabad')
-        .map(res => res.json())
-        .subscribe( (data) => {
-          resolve(data);
-        }, (error) => {
-          console.log(error);
-        });
-     });
-  }
 
    login(data) {
       let headers = new Headers();
@@ -52,7 +37,7 @@ export class ApiService {
         .subscribe( (data) => {
           resolve(data);
         }, (error) => {
-          console.log(error);
+          this.notAuthorized(error);
         });
      });
   }
@@ -68,7 +53,7 @@ export class ApiService {
         .subscribe( (data) => {
           resolve(data);
         }, (error) => {
-          console.log(error);
+          this.notAuthorized(error);
         });
      });
   }
@@ -84,7 +69,7 @@ export class ApiService {
         .subscribe( (data) => {
           resolve(data);
         }, (error) => {
-          console.log(error);
+          this.notAuthorized(error);
         });
      });
   }
@@ -101,7 +86,7 @@ export class ApiService {
         .subscribe( (data) => {
           resolve(data);
         }, (error) => {
-          console.log(error);
+          this.notAuthorized(error);
         });
      });
   }
@@ -117,9 +102,16 @@ export class ApiService {
         .subscribe( (data) => {
           resolve(data);
         }, (error) => {
-          console.log(error);
+          this.notAuthorized(error);
         });
      });
+  }
+
+  notAuthorized(error){
+    if(error.status == '401'){
+      this.localStorageService.clearAll();
+      location.reload();
+    }
   }
 
 }

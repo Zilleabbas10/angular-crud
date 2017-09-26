@@ -18,7 +18,6 @@ export class LoginFormComponent implements OnInit {
   };
 
   constructor(private localStorageService: LocalStorageService, private apiservice: ApiService, private fb: FacebookService) {
-    this.getdata();
     fb.init({
       appId: '377306262682113',
       version: 'v2.9'
@@ -62,12 +61,6 @@ export class LoginFormComponent implements OnInit {
       .catch((error: any) => console.error(error));
   }
 
-
-  getdata(){
-    this.apiservice.getLatLong().then( (data) => {
-      console.log(data);
-    })
-  }
 
   onSignInSubmit(){
     if(this.signInUser.email == "zille@gmail.com" && this.signInUser.password == "123456" ){
