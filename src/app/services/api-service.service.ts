@@ -10,8 +10,8 @@ export class ApiService {
   public headers: any;
   public token: string;
   public checkDatabase: any;
-  //public base_url: string = 'https://rails-angular2.herokuapp.com/';
-  public base_url: string = 'http://192.168.10.5:3000/';
+  public base_url: string = 'https://rails-angular2.herokuapp.com/';
+  //public base_url: string = 'http://192.168.10.5:3000/';
 
   constructor(public http: Http, private localStorageService: LocalStorageService) {
     this.checkDatabase = this.localStorageService.get('data');
